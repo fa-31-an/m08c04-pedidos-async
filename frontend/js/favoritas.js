@@ -1,17 +1,23 @@
 window.onload = () => {
-  const app = document.getElementById("root");
-  const container = document.createElement("div");
+  let app = document.getElementById("root");
+  let container = document.createElement("div");
   container.setAttribute("class", "container");
   app.appendChild(container);
 
-  // Aqui debemos agregar nuestro fetch
+  let favorite = JSON.parse(localStorage.getItem("favoriteMovies"));
 
+  if (favorite === null || favorite.length === 0) {
+    const card = document.createElement("div");
+    card.setAttribute("class", "card");
 
+    const message = document.createElement("p");
+    message.textContent = "Aún no hay películas favoritas";
 
-  /** Codigo que debemos usar para mostrar los datos en el frontend
-    let data = peliculas.data;
-
-    data.forEach((movie) => {
+    container.appendChild(card);
+    card.appendChild(message);
+  } else {
+    
+    favorite.forEach((movie) => {
       const card = document.createElement("div");
       card.setAttribute("class", "card");
 
@@ -27,12 +33,12 @@ window.onload = () => {
       container.appendChild(card);
       card.appendChild(h1);
       card.appendChild(p);
-      if (movie.genre !== null) {
+      if (movie.genre !== null && movie.genre !== undefined) {
         const genero = document.createElement("p");
-        genero.textContent = `Genero: ${movie.genre.name}`;
+        genero.textContent = `Género: ${movie.genre.name}`;
         card.appendChild(genero);
       }
       card.appendChild(duracion);
     });
-  */
+  }
 };
